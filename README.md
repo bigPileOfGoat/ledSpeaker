@@ -2,7 +2,7 @@
 Bluetooth speaker with audio reactive led rings
 
 Uses 2 x Neopixel Rings (48 leds in total) in series that react to the left and right audio channels.
-Makes extensive use of secondary buffers to control the rings as separate units. Also allows for offsetting and reversing of the ring values.
+Makes extensive use of secondary buffer arrays to control the rings as separate units. Also allows for offsetting and reversing of the ring values.
 
 Requires these libraries to work:
 
