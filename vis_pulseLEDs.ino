@@ -1,24 +1,24 @@
 //pulse each ring a solid color based on EQ low, mid and high values
 // red = low, green = mid, blue = high
 void pulseLEDs() {
-  
-  for (int j=0; j<24; j++) {
-    lRing[j].r = left.low;    
+
+  for (int j = 0; j < 24; j++) {
+    lRing[j].r = left.low;
     lRing[j].g = left.mid;
     lRing[j].b = left.high;
-    rRing[j].r = right.low;    
+    rRing[j].r = right.low;
     rRing[j].g = right.mid;
     rRing[j].b = right.high;
     byte tempLR = lRing[j].r;
-    byte tempLG = lRing[j].g; 
+    byte tempLG = lRing[j].g;
     byte tempLB = lRing[j].b;
     byte tempRR = rRing[j].r;
     byte tempRG = rRing[j].g;
     byte tempRB = rRing[j].b;
-    if(onBeatLow) pulseVar = random(0,4);
+    if (onBeatLow) pulseVar = random(0, 4);
     if (pulseVar == 0) {
       tempLR = lRing[j].g;
-      tempLG = lRing[j].b; 
+      tempLG = lRing[j].b;
       tempLB = lRing[j].r;
       tempRR = rRing[j].g;
       tempRG = rRing[j].b;
@@ -26,7 +26,7 @@ void pulseLEDs() {
     }
     if (pulseVar == 1) {
       tempLR = lRing[j].b;
-      tempLG = lRing[j].r; 
+      tempLG = lRing[j].r;
       tempLB = lRing[j].g;
       tempRR = rRing[j].b;
       tempRG = rRing[j].r;
@@ -34,7 +34,7 @@ void pulseLEDs() {
     }
     if (pulseVar == 2) {
       tempLR = lRing[j].g;
-      tempLG = lRing[j].r; 
+      tempLG = lRing[j].r;
       tempLB = lRing[j].b;
       tempRR = rRing[j].g;
       tempRG = rRing[j].r;
@@ -42,7 +42,7 @@ void pulseLEDs() {
     }
     if (pulseVar == 3) {
       tempLR = lRing[j].b;
-      tempLG = lRing[j].g; 
+      tempLG = lRing[j].g;
       tempLB = lRing[j].r;
       tempRR = rRing[j].b;
       tempRG = rRing[j].g;
