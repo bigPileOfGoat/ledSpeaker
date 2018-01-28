@@ -40,7 +40,7 @@ Speaker left, right;
 #define NUM_LEDS 48
 CRGB leds[NUM_LEDS]; //creates single array of leds for the FastLED library
 byte ledBrightness = 10; //current brightness of leds
-byte maxBrightness = 65; //maximum brightness of leds
+byte maxBrightness = 25; //maximum brightness of leds
 boolean ledsOn = true;
 CRGBPalette16 currentPalette; // used to change colour palletes during visualisations
 byte hsvIndex = random(255);
@@ -63,7 +63,7 @@ LED lRing[24];
 LED rRing[24];
 
 /* variables used for timing, visualisation changes, and duration */
-byte maxPatterns = 6;                     // maximum number of visualisations
+byte maxPatterns = 7;                     // maximum number of visualisations
 byte maxAnimations = 10;                  // same as maxPatterns, used for manual changes
 int maxAnimTime = 8000;                   // max bounds for visualisation duration
 boolean animSameAsPattern = true;         // the first manualy selected visualisation is the same as current random pattern
@@ -136,6 +136,7 @@ void loop() {
     if (animSelect == 8) barEQ(1, 0);
     if (animSelect == 9) barEQ(1, 1);
     if (animSelect == 10) barEQ(1, 2);
+    //FastLED.setBrightness(maxBrightness);// value from 0 - 255
     FastLED.show(); //update leds with new data
   }
   /* choose value to decide next rotation change when low beat has returned true
