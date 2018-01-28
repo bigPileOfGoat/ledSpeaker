@@ -1,4 +1,4 @@
-//reads button states
+/* reads button states */
 void readButtons() {
 
   if (ledPowerButton.uniquePress()) {
@@ -36,7 +36,7 @@ void readButtons() {
   FastLED.setBrightness(ledBrightness); //update FastLED array brightness
 }
 
-// 2 white pulses light on button press
+/* 2 white pulses light on button press */
 void buttonPulse() {
   for (int i = 0; i < 255; i = i + 6) {
     for (int j = 0; j < 24; j++) {
@@ -57,7 +57,7 @@ void buttonPulse() {
   delay(10);
 }
 
-// fades red light off when leds are turned off
+/* fades red light off when leds are turned off */
 void powerButtonFadeOff() {
   for (int i = 255; i >= 0; i--) {
     for (int j = 0; j < 24; j++) {
@@ -69,7 +69,7 @@ void powerButtonFadeOff() {
   }
 }
 
-// fades red light on when leds are turned on
+/* fades red light on when leds are turned on */
 void powerButtonFadeOn() {
   for (int i = 0; i < 255; i++) {
     for (int j = 0; j < 24; j++) {
@@ -81,7 +81,7 @@ void powerButtonFadeOn() {
   }
 }
 
-// 3 slowing red pulses as speaker powers on
+/* 3 slowing red pulses as speaker powers on */
 void powerOnAnim() {
   delay(1000);
   for (int i = 0; i < 255; i = i + 6) {

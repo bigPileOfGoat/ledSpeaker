@@ -1,4 +1,4 @@
-//reads in audio EQ values for high, mid, and low.
+/* reads in audio EQ values for high, mid, and low */
 void readAudio() {
 
   MSGEQ7.read(); //read EQ values
@@ -10,10 +10,10 @@ void readAudio() {
   right.high = MSGEQ7.get(MSGEQ7_HIGH, MSGEQ7_RIGHT);
 }
 
-//clears colours to 0 in led array and buffer
+/* clears colours to 0 in led array and buffer */
 void clearColour() {
 
-  //clears ring buffer arrays
+  /* clears ring buffer arrays */
   for (int j = 0; j < 24; j++) {
     lRing[j].r = 0;
     lRing[j].g = 0;
@@ -22,7 +22,7 @@ void clearColour() {
     rRing[j].g = 0;
     rRing[j].b = 0;
   }
-  //clears fastLED arrays
+  /* clears fastLED arrays */
   for (int j = 0; j < 24; j++) {
     leds[lRing[j].pos] = CRGB(0, 0, 0);
     leds[rRing[j].pos] = CRGB(0, 0, 0);
@@ -30,7 +30,7 @@ void clearColour() {
   FastLED.show();
 }
 
-//offsets the starting point of each ring in a set direction and offset amount
+/* offsets the starting point of each ring in a set direction and offset amount */
 void ringOffset(LED inputRing[], byte offsetValue, boolean turnLeft) {
 
   LED tmpRing[24]; //create temporary array for shifting values
@@ -69,7 +69,7 @@ void ringOffset(LED inputRing[], byte offsetValue, boolean turnLeft) {
   }
 }
 
-//reverse ring led buffer direction
+/* reverse ring led buffer direction */
 void reverseRing(LED inputRing[]) {
 
   LED tmpRing[24];
@@ -87,8 +87,8 @@ void reverseRing(LED inputRing[]) {
   }
 }
 
-//this will reverse and correct offset of right led position data and
-//set all RGB values to 0
+/* this will reverse and correct offset of right led position data and
+   set all RGB values to 0 */
 void setupLedRingArrays(byte bR, byte bG, byte bB) {
 
   //set buffer RGB values and FastLED position for each led on each ring
@@ -105,46 +105,6 @@ void setupLedRingArrays(byte bR, byte bG, byte bB) {
   reverseRing(rRing);
   ringOffset(rRing, 1, false);
   clearColour();
-}
-
-//will detetct a set number of low beats (or bass peaks) to cause a change in visualisation
-//this could change random visualisations, or just change aspects of current visualisation
-void detectLowBeatChange(byte onNumBeats, byte cutOff) {
-  onBeatLow = false;
-  byte oldBeatReading = currentBeatReadingLow;
-  currentBeatReadingLow = (left.low + right.low) / 2;
-  if ((currentBeatReadingLow > cutOff) && (oldBeatReading < cutOff)) {
-    if (onNumBeats > 0) {
-      if (beatCounterLow > onNumBeats) {
-        beatCounterLow = 0;
-        onBeatLow = true;
-      } else {
-        beatCounterLow++;
-      }
-    } else {
-      onBeatLow = true;
-    }
-  }
-}
-
-//will detetct a set number of high beats (or high peaks) to cause a change in visualisation
-//this could change random visualisations, or just change aspects of current visualisation
-void detectHighBeatChange(byte onNumBeats, byte cutOff) {
-  onBeatHigh = false;
-  byte oldBeatReading = currentBeatReadingHigh;
-  currentBeatReadingHigh = (left.low + right.low) / 2;
-  if ((currentBeatReadingHigh > cutOff) && (oldBeatReading < cutOff)) {
-    if (onNumBeats > 0) {
-      if (beatCounterHigh > onNumBeats) {
-        beatCounterHigh = 0;
-        onBeatHigh = true;
-      } else {
-        beatCounterHigh++;
-      }
-    } else {
-      onBeatHigh = true;
-    }
-  }
 }
 
 void changePallete() {

@@ -1,5 +1,6 @@
-//single led chases around ring leaving trail of freq based colour
-/* will change freq displayed and colour on the falling edge of a high frequency beat */
+/* single led chases around ring leaving trail of freq based colour
+   will change freq displayed and colour on the falling edge of a high frequency beat */
+
 void chaser() {
   if (chaseFreq == 0) {
     leds[chasePos] = CRGB(left.low, left.mid, left.high);

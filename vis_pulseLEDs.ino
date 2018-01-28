@@ -1,5 +1,6 @@
-//pulse each ring a solid color based on EQ low, mid and high values
-// red = low, green = mid, blue = high
+/* pulse each ring a solid color based on EQ low, mid and high values
+   red = low, green = mid, blue = high */
+
 void pulseLEDs() {
 
   for (int j = 0; j < 24; j++) {
