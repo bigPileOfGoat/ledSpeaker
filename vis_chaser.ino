@@ -6,17 +6,21 @@ void chaser() {
     leds[48 - (chasePos + 1)] = CRGB(right.low, right.mid, right.high);
   }
   if (chaseFreq == 1) {
-    leds[chasePos] = CRGB(left.low, 0, 0);
-    leds[48 - (chasePos + 1)] = CRGB(right.low, 0, 0);
+    leds[chasePos] = ColorFromPalette(currentPalette, left.low, 255, LINEARBLEND);
+    leds[48 - (chasePos + 1)] = ColorFromPalette(currentPalette, right.low, 255, LINEARBLEND);
   }
   if (chaseFreq == 2) {
-    leds[chasePos] = CRGB(0, left.mid, 0);
-    leds[48 - (chasePos + 1)] = CRGB(0, right.mid, 0);
+    leds[chasePos] = ColorFromPalette(currentPalette, left.mid, 255, LINEARBLEND);
+    leds[48 - (chasePos + 1)] = ColorFromPalette(currentPalette, right.mid, 255, LINEARBLEND);
   }
   if (chaseFreq == 3) {
-    leds[chasePos] = CRGB(0, 0, left.high);
-    leds[48 - (chasePos + 1)] = CRGB(0, 0, right.high);
+    leds[chasePos] = ColorFromPalette(currentPalette, left.high, 255, LINEARBLEND);
+    leds[48 - (chasePos + 1)] = ColorFromPalette(currentPalette, right.high, 255, LINEARBLEND);
   }
+  //if (chaseFreq == 4) {
+  //  leds[chasePos] = ColorFromPalette(currentPalette, left.high, left.high, LINEARBLEND);
+  //  leds[48 - (chasePos + 1)] = ColorFromPalette(currentPalette, right.high, right.high, LINEARBLEND);
+  //}
   chasePos++;
   if (chasePos > 23) chasePos = 0;
 }

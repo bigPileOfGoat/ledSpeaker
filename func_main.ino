@@ -146,3 +146,15 @@ void detectHighBeatChange(byte onNumBeats, byte cutOff) {
     }
   }
 }
+
+void changePallete() {
+  byte pVal = random (7);
+  if (pVal == 0) currentPalette = RainbowColors_p;
+  if (pVal == 1) currentPalette = RainbowStripeColors_p;
+  if (pVal == 2) currentPalette = CloudColors_p;
+  if (pVal == 3) currentPalette = OceanColors_p;
+  if (pVal == 4) currentPalette = LavaColors_p;
+  if (pVal == 5) currentPalette = ForestColors_p;
+  if (pVal == 6) currentPalette = PartyColors_p;
+}
+

@@ -42,6 +42,8 @@ CRGB leds[NUM_LEDS]; //creates single array of leds for the FastLED library
 byte ledBrightness = 10; //current brightness of leds
 byte maxBrightness = 65; //maximum brightness of leds
 boolean ledsOn = true;
+CRGBPalette16 currentPalette; // used to change colour palletes during visualisations
+byte hsvIndex = random(255);
 
 //creates an object for the LED arrays
 /*used in an array as a buffer for the CRGB leds[] object */
@@ -61,9 +63,9 @@ LED lRing[24];
 LED rRing[24];
 
 // variables used for timing, visualisation changes, and duration
-byte maxPatterns = 8;                     // maximum number of visualisations
-byte maxAnimations = 11;                   // same as maxPatterns, used for manual changes
-int maxAnimTime = 16000;                  // max bounds for visualisation duration
+byte maxPatterns = 6;                     // maximum number of visualisations
+byte maxAnimations = 10;                   // same as maxPatterns, used for manual changes
+int maxAnimTime = 8000;                  // max bounds for visualisation duration
 byte chaseFreq = 0;                       // frequency displayed in chaser visualisation
 boolean animSameAsPattern = true;         // the first manualy selected visualisation is the same as current random pattern
 byte animOff = 0;                         // manual visualisation selection off
@@ -77,6 +79,7 @@ int currentBeatReadingLow = 0;            // stores current low beat reading
 byte beatCounterLow = 0;                  // used to return a number of low beats
 byte returnedBeatLow = 0;                 // returns number of low beats from detection function
 boolean onBeatLow = false;                // returns true is a beat is detected
+boolean allColour = false;                // decides rgb or palette for barEQ visualisation 
 
 int currentBeatReadingHigh = 0;           // stores current high beat reading
 byte beatCounterHigh = 0;                 // used to return a number of high beats
@@ -116,17 +119,19 @@ void loop() {
   if ((currentMillis - prevMillis > 20) && (ledsOn)) {
     prevMillis = currentMillis;
     readAudio(); //copy eq values to buffer
-    if ((pattern == 0) || (animSelect == 1)) barEQ(1, barFreq, false);
-    if ((pattern == 1) || (animSelect == 2)) barEQ(2, 0, false);
-    if ((pattern == 2) || (animSelect == 3)) barEQ(3, 0, false);
+    if ((pattern == 0) || (animSelect == 1)) barEQ(1, barFreq);
+    if ((pattern == 1) || (animSelect == 2)) barEQ(2, 0);
+    if ((pattern == 2) || (animSelect == 3)) barEQ(3, 0);
     if ((pattern == 3) || (animSelect == 4)) sparkle();
     if ((pattern == 4) || (animSelect == 5)) pulseLEDs();
     if ((pattern == 5) || (animSelect == 6)) mirrorBarEQ(0);
     if ((pattern == 6) || (animSelect == 7)) chaser();
-    if ((pattern == 7) || (animSelect == 8)) beatMissile();
-    if (animSelect == 9) barEQ(1, 0, false);
-    if (animSelect == 10) barEQ(1, 1, false);
-    if (animSelect == 11) barEQ(1, 2, false);
+    //if ((pattern == 7) || (animSelect == 8)) {
+      // new visualisation?
+    //}
+    if (animSelect == 8) barEQ(1, 0);
+    if (animSelect == 9) barEQ(1, 1);
+    if (animSelect == 10) barEQ(1, 2);
     FastLED.show(); //update leds with new data
   }
   //choose value to decide next rotation change when low beat has returned true
@@ -135,8 +140,17 @@ void loop() {
   if (onBeatLow) {
     rotatePattern = random(300);
     if ((pattern == 3) || (animSelect == 4)) rotatePattern = 0; //stop rotation if sparkle visualisation running
+    //decide whether to use palette or rgb for barEQ visualisation
+    hsvIndex = random(255);
+    changePallete();
+    if (allColour) { 
+      allColour = false;
+    } else {
+      allColour = true;
+    }
   }
   if (onBeatHigh) {
+    changePallete();
     barFreq = random(0, 3);
     chaseFreq = random(3);
   }
@@ -144,7 +158,7 @@ void loop() {
   //between 2 seconds and 12 seconds
   static long prevMillis1 = 0;
   unsigned long currentMillis1 = millis();
-  if ((currentMillis1 - prevMillis1 > animTimer) && (ledsOn)) {
+  if ((currentMillis1 - prevMillis1 > animTimer) && (ledsOn) && (onBeatHigh)) {
     prevMillis1 = currentMillis1;
     animTimer = random(2000, maxAnimTime); //set visualisation change timer
     if (pattern < maxPatterns) {

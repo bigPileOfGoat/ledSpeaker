@@ -2,7 +2,7 @@
 /* Select 1,2,3 bars
    audioFreq selection only works for 1 EQ bar
    if allColour = true then a freq will be assigned to each colour */
-void barEQ(byte numBars, byte audioFreq, boolean allColour) {
+void barEQ(byte numBars, byte audioFreq) {
 
   //clears all led colour values to 0
   clearColour();
@@ -12,17 +12,17 @@ void barEQ(byte numBars, byte audioFreq, boolean allColour) {
       byte tempVal = map(left.low, 0, 255, 0, 23);
       for (int j = 0; j < tempVal; j++) {
         if (!allColour) {
-          leds[lRing[j].pos] = CRGB(left.low, 0, 0);
+          leds[lRing[j].pos] = CHSV(HUE_RED, 255, 255);
         } else {
-          leds[lRing[j].pos] = CRGB(left.low, left.low, left.low);
+          leds[lRing[j].pos] = ColorFromPalette( currentPalette, hsvIndex, 255, LINEARBLEND);
         }
       }
       tempVal = map(right.low, 0, 255, 0, 23);
       for (int j = 0; j < tempVal; j++) {
         if (!allColour) {
-          leds[rRing[j].pos] = CRGB(right.low, 0, 0);
+          leds[rRing[j].pos] = CHSV(HUE_RED, 255, 255);
         } else {
-          leds[rRing[j].pos] = CRGB(right.low, right.low, right.low);
+          leds[rRing[j].pos] = ColorFromPalette( currentPalette, hsvIndex, 255, LINEARBLEND);
         }
       }
     }
@@ -32,17 +32,17 @@ void barEQ(byte numBars, byte audioFreq, boolean allColour) {
       byte tempVal = map(left.mid, 0, 255, 0, 23);
       for (int j = 0; j < tempVal; j++) {
         if (!allColour) {
-          leds[lRing[j].pos] = CRGB(0, left.mid, 0);
+          leds[lRing[j].pos] = CHSV(HUE_GREEN, 255, 255);
         } else {
-          leds[lRing[j].pos] = CRGB(left.mid, left.mid, left.mid);
+          leds[lRing[j].pos] = ColorFromPalette( currentPalette, hsvIndex, 255, LINEARBLEND);
         }
       }
       tempVal = map(right.mid, 0, 255, 0, 23);
       for (int j = 0; j < tempVal; j++) {
         if (!allColour) {
-          leds[rRing[j].pos] = CRGB(0, right.mid, 0);
+          leds[rRing[j].pos] = CHSV(HUE_GREEN, 255, 255);
         } else {
-          leds[rRing[j].pos] = CRGB(right.mid, right.mid, right.mid);
+          leds[rRing[j].pos] = ColorFromPalette( currentPalette, hsvIndex, 255, LINEARBLEND);
         }
       }
     }
@@ -52,17 +52,17 @@ void barEQ(byte numBars, byte audioFreq, boolean allColour) {
       byte tempVal = map(left.high, 0, 255, 0, 23);
       for (int j = 0; j < tempVal; j++) {
         if (!allColour) {
-          leds[lRing[j].pos] = CRGB(0, 0, left.high);
+          leds[lRing[j].pos] = CHSV(HUE_BLUE, 255, 255);
         } else {
-          leds[lRing[j].pos] = CRGB(left.high, left.high, left.high);
+          leds[lRing[j].pos] = ColorFromPalette( currentPalette, hsvIndex, 255, LINEARBLEND);
         }
       }
       tempVal = map(right.high, 0, 255, 0, 23);
       for (int j = 0; j < tempVal; j++) {
         if (!allColour) {
-          leds[rRing[j].pos] = CRGB(0, 0, right.high);
+          leds[rRing[j].pos] = CHSV(HUE_BLUE, 255, 255);
         } else {
-          leds[rRing[j].pos] = CRGB(right.high, right.high, right.high);
+          leds[rRing[j].pos] = ColorFromPalette( currentPalette, hsvIndex, 255, LINEARBLEND);
         }
       }
     }
@@ -74,37 +74,21 @@ void barEQ(byte numBars, byte audioFreq, boolean allColour) {
     //create first EQ bar for low
     byte tempVal = map(left.low, 0, 255, 0, 11);
     for (int j = 0; j < tempVal; j++) {
-      if (!allColour) {
-        leds[lRing[j].pos] = CRGB(left.low, 0, 0);
-      } else {
-        leds[lRing[j].pos] = CRGB(left.low, left.low, left.low);
-      }
+      leds[lRing[j].pos] = CHSV(HUE_RED, 255, 255);
     }
     tempVal = map(right.low, 0, 255, 0, 11);
     for (int j = 0; j < tempVal; j++) {
-      if (!allColour) {
-        leds[rRing[j].pos] = CRGB(right.low, 0, 0);
-      } else {
-        leds[rRing[j].pos] = CRGB(right.low, right.low, right.low);
-      }
+      leds[rRing[j].pos] = CHSV(HUE_RED, 255, 255);
     }
     //reading low frequency for left and right channels
     //create second EQ bar for high
     tempVal = map(left.mid, 0, 255, 12, 23);
     for (int j = 12; j < tempVal; j++) {
-      if (!allColour) {
-        leds[lRing[j].pos] = CRGB(0, left.mid, 0);
-      } else {
-        leds[lRing[j].pos] = CRGB(left.mid, left.mid, left.mid);
-      }
+      leds[lRing[j].pos] = CHSV(HUE_GREEN, 255, 255);
     }
     tempVal = map(right.mid, 0, 255, 12, 23);
     for (int j = 12; j < tempVal; j++) {
-      if (!allColour) {
-        leds[rRing[j].pos] = CRGB(0, right.mid, 0);
-      } else {
-        leds[rRing[j].pos] = CRGB(right.mid, right.mid, right.mid);
-      }
+      leds[rRing[j].pos] = CHSV(HUE_GREEN, 255, 255);
     }
   }
 
@@ -114,55 +98,31 @@ void barEQ(byte numBars, byte audioFreq, boolean allColour) {
     //create first EQ bar for low
     byte tempVal = map(left.low, 0, 255, 0, 7);
     for (int j = 0; j < tempVal; j++) {
-      if (!allColour) {
-        leds[lRing[j].pos] = CRGB(left.low, 0, 0);
-      } else {
-        leds[lRing[j].pos] = CRGB(left.low, left.low, left.low);
-      }
+      leds[lRing[j].pos] = CHSV(HUE_RED, 255, 255);
     }
     tempVal = map(right.low, 0, 255, 0, 7);
     for (int j = 0; j < tempVal; j++) {
-      if (!allColour) {
-        leds[rRing[j].pos] = CRGB(right.low, 0, 0);
-      } else {
-        leds[rRing[j].pos] = CRGB(right.low, right.low, right.low);
-      }
+      leds[rRing[j].pos] = CHSV(HUE_RED, 255, 255);
     }
     //reading mid frequency for left and right channels
     //create second EQ bar for mid
     tempVal = map(left.mid, 0, 255, 8, 15);
     for (int j = 8; j < tempVal; j++) {
-      if (!allColour) {
-        leds[lRing[j].pos] = CRGB(0, left.mid, 0);
-      } else {
-        leds[lRing[j].pos] = CRGB(left.mid, left.mid, left.mid);
-      }
+      leds[lRing[j].pos] = CHSV(HUE_GREEN, 255, 255);
     }
     tempVal = map(right.mid, 0, 255, 8, 15);
     for (int j = 8; j < tempVal; j++) {
-      if (!allColour) {
-        leds[rRing[j].pos] = CRGB(0, right.mid, 0);
-      } else {
-        leds[rRing[j].pos] = CRGB(right.mid, right.mid, right.mid);
-      }
+      leds[rRing[j].pos] = CHSV(HUE_GREEN, 255, 255);
     }
     //reading high frequency for left and right channels
     //create third EQ bar for high
     tempVal = map(left.high, 0, 255, 16, 23);
     for (int j = 16; j < tempVal; j++) {
-      if (!allColour) {
-        leds[lRing[j].pos] = CRGB(0, 0, left.high);
-      } else {
-        leds[lRing[j].pos] = CRGB(left.high, left.high, left.high);
-      }
+      leds[lRing[j].pos] = CHSV(HUE_BLUE, 255, 255);
     }
     tempVal = map(right.high, 0, 255, 16, 23);
     for (int j = 16; j < tempVal; j++) {
-      if (!allColour) {
-        leds[rRing[j].pos] = CRGB(0, 0, right.high);
-      } else {
-        leds[rRing[j].pos] = CRGB(right.high, right.high, right.high);
-      }
+      leds[rRing[j].pos] = CHSV(HUE_BLUE, 255, 255);
     }
   }
 }
