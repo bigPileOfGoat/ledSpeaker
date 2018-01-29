@@ -1,13 +1,13 @@
 /* 6 leds per low,mid and high frequencies, at random positions */
 void sparkle() {
   
-  clearColour();
   /* update buffer with upto 18 led values each ring. upto 6 for each frequency with
      brightness and number of leds defined by frequency value and colour defined by frequency band. */
   static long prevMillisSp = 0;
   unsigned long currentMillisSp = millis(); // read time
   if (currentMillisSp - prevMillisSp > 50) {
     prevMillisSp = currentMillisSp;
+    clearColour();
     byte tVal = map(left.low, 0, 255, 0, left.low / 17); //scale EQ value to 6
     for (int j = 0; j < tVal; j++) {
       lRing[random(24)].r = left.low;

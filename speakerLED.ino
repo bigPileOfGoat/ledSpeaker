@@ -39,8 +39,8 @@ Speaker left, right;
 #define DATA_PIN 6
 #define NUM_LEDS 48
 CRGB leds[NUM_LEDS]; //creates single array of leds for the FastLED library
-byte ledBrightness = 10; //current brightness of leds
-byte maxBrightness = 25; //maximum brightness of leds
+byte ledBrightness = 40; //current brightness of leds
+byte maxBrightness = 40; //maximum brightness of leds
 boolean ledsOn = true;
 CRGBPalette16 currentPalette; // used to change colour palletes during visualisations
 byte hsvIndex = random(255);
@@ -71,7 +71,7 @@ byte animOff = 0;                         // manual visualisation selection off
 byte pattern= random(maxPatterns);        // randomise starting visualisation
 byte animSelect = 0;                      // current manualy selected visualisation, 0 if randomised
 int animTimer = random(2000, maxAnimTime);// sets visualisation duration timer
-byte rotatePattern = random(500);                   // used for changing or freezing ring rotation (2 out of 5 chance of left or right, 1 out of 5 chance of stop)
+byte rotatePattern = random(500);         // used for changing or freezing ring rotation (2 out of 5 chance of left or right, 1 out of 5 chance of stop)
 
 /* used for beat detection  */
 int currentBeatReadingLow = 0;            // stores current low beat reading
