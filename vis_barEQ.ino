@@ -3,7 +3,7 @@
    if allColour = true then a freq will be assigned to each colour */
 
 void barEQ(byte numBars, byte audioFreq) {
-
+  // use this somehwere for fading the bars (left.high / tempVal) * (tempVal - j)
   /* clears all led colour values to 0 */
   clearColour();
   if (numBars == 1) {

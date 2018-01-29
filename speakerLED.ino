@@ -71,7 +71,7 @@ byte animOff = 0;                         // manual visualisation selection off
 byte pattern= random(maxPatterns);        // randomise starting visualisation
 byte animSelect = 0;                      // current manualy selected visualisation, 0 if randomised
 int animTimer = random(2000, maxAnimTime);// sets visualisation duration timer
-byte rotatePattern = random(500);         // used for changing or freezing ring rotation (2 out of 5 chance of left or right, 1 out of 5 chance of stop)
+byte rotatePattern = random(300);         // used for changing or freezing ring rotation (1 in 3 chance of left, right or stop)
 
 /* used for beat detection  */
 int currentBeatReadingLow = 0;            // stores current low beat reading
@@ -143,7 +143,7 @@ void loop() {
      allows direction to change based on falling edge of beat (not very accurate
      but it looks good, so meh ;) */
   if (onBeatLow) {
-    rotatePattern = random(500);
+    rotatePattern = random(300);
     if ((pattern == 3) || (animSelect == 4)) rotatePattern = 0; //stop rotation if sparkle visualisation running
     //decide whether to use palette or rgb for barEQ visualisation
     hsvIndex = random(255);
@@ -176,12 +176,12 @@ void loop() {
   unsigned long currentMillis2 = millis();
   if ((currentMillis2 - prevMillis2 > 200) && (ledsOn)) {
     prevMillis2 = currentMillis2;
-    if ((rotatePattern >= 99) && (rotatePattern < 300)) {
+    if ((rotatePattern >= 100) && (rotatePattern < 200)) {
       /* rotate 1 to the left */
       ringOffset(lRing, 1, true);
       ringOffset(rRing, 1, true);
     }
-    if ((rotatePattern >= 299 ) && (rotatePattern < 500)) {
+    if ((rotatePattern >= 200 ) && (rotatePattern < 300)) {
       /* rotate 1 to the right */
       ringOffset(lRing, 1, false);
       ringOffset(rRing, 1, false);
