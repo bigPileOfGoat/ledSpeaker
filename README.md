@@ -4,7 +4,7 @@ Bluetooth speaker with audio reactive led rings
 Uses 2 x Neopixel Rings (48 leds in total) in series that react to the left and right audio channels.
 Makes extensive use of secondary buffer arrays to control the rings as separate units. Also allows for offsetting and reversing of the ring values. 
 
-The right ring fitted to my build was 1 led clockwise from where it should be, the starting point for both rings in the buffer arrays should at the 0600 position on the led rings themselves. This is what the offset function corrects during setup. FastLED.h offered me no simple way to do that, or to reverse the led order.
+The right ring fitted to my build was 1 led clockwise from where it should be, the starting point for both rings in the buffer arrays should start at the 0600 position on the led rings themselves. This is what the offset function corrects during setup. FastLED.h offered me no simple way to do that, or to reverse the led order.
 
 Ive tried to keep the code simple enough to achieve what I need using only 57% of storage and 31% of dynamic memory on a arduino pro mini.
 
