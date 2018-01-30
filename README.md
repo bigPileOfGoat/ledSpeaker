@@ -9,7 +9,7 @@ The right ring fitted to my build was 1 led anti-clockwise from where it should 
 
 Ive tried to keep the code simple enough to achieve what I need using 57% of storage and 31% of dynamic memory on a arduino pro mini.
 
-This software will take the low, mid, and high values for left and right audio then pass that to one of 7 visualisations. A timer is set to a value between 2000 and 8000ms every visualisation change. When timer is met the visualisation will change on the next low peak.
+This software will take the low (bass), mid, and high frequency values (0-255) for left and right audio then pass that to one of 7 visualisations. A timer is set to a random value between 2000 and 8000ms every visualisation change. When timer is met the visualisation will change on the falling edge of the next low peak.
 Colour palettes will change on different visualisations depending on high frequency or low frequency peaks. The led rings also rotate in set directions or stop randomly on a low peak.
 
 This code can and will be tidied up and trimmed down, im convinced this can be improved so ill likely stick at it :)
